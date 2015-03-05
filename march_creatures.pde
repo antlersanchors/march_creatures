@@ -41,12 +41,14 @@ public void setup() {
 	c2 = new ViralCreature((int)random(width), (int)random(height), 20);
 	creatures.add(c1);
 	creatures.add(c2);
+	herd.add(c1);
+	herd.add(c2);
 
 	//SPRING
 	physics.add(c1); physics.add(c2);
 	
 	spring = physics.makeSpring(c1, c2);
-	spring.restlength(20);
+	spring.restlength(100);
 	
 }
 
@@ -74,6 +76,41 @@ public void draw() {
 
 }
 
-public void mousePressed() {
-	
+public void keyPressed() {
+	if ( key == 'f' || key == 'F' ) {
+		println("pressed!");
+
+		Creature newCreature;
+		Creature randomBuddy;
+		int creaturesSize;
+		int randomAddress;
+
+		newCreature = new ViralCreature((int)random(width), (int)random(height), 20);
+		creatures.add(newCreature);
+		herd.add(newCreature);
+		physics.add(newCreature);
+
+		//Make a friend!
+		creaturesSize = creatures.size();
+		randomAddress = int(random(1, creaturesSize));
+		randomBuddy = creatures.get(randomAddress);
+		spring = physics.makeSpring(newCreature, randomBuddy);
+	}
+
+	if ( key == 's' || key == 'S') {
+		for (int i = 0; i < physics.forces().size(); i++) {
+			if (physics.forces().get(i) instanceof Spring) {
+			    Spring mSSpring = (Spring)physics.forces().get(i);
+			    mSSpring.restlength(10);
+			}
+		}
+	}
+	if ( key == 'd' || key == 'D') {
+		for (int i = 0; i < physics.forces().size(); i++) {
+			if (physics.forces().get(i) instanceof Spring) {
+			    Spring mSSpring = (Spring)physics.forces().get(i);
+			    mSSpring.restlength(175);
+			}
+		}
+	}
 }
