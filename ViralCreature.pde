@@ -8,7 +8,7 @@ class ViralCreature extends Creature {
   private float mutate() {
     float noisyOscValue;
 
-    noisyOscValue = osc.update()*noise(0,0.03);
+    noisyOscValue = osc.update()*noise(0,0.3);
 
     return noisyOscValue;
   }
@@ -21,6 +21,7 @@ class ViralCreature extends Creature {
 
     color outerColor = color(232, 104, 187+(20*hormones));
     color innerColor = color(15+(30*hormones), 232, 55);
+    color mouthColor = color(185, 185, 185, 20);
     
     float strokeOpacity = 200;
     float fillOpacity = 30;
@@ -55,6 +56,10 @@ class ViralCreature extends Creature {
         ellipse(px, py, w+(0.5*hormones), h+(0.5*hormones)); 
         angle += angleStep;
       }
+      ellipseMode(CENTER);
+      noStroke();
+      fill(mouthColor);
+      ellipse(5, 5, 8+(0.1*hormones), 20);
       endShape();
 
     shape(v,0,0);

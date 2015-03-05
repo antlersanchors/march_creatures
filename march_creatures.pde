@@ -52,7 +52,7 @@ public void setup() {
 	spring.restlength(100);
 
 	//OSCILLATOR
-	osc = new Oscillator(-10, 5, 0.05);
+	osc = new Oscillator(-5, 5, 0.03);
 	
 }
 
