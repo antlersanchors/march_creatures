@@ -3,7 +3,7 @@ import mathematik.Vector3f;
 
 class Creature extends BehaviorParticle {
   
-  float   _scale;
+  float _scale;
   
   public Creature(int x, int y, int r) {
     super();

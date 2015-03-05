@@ -21,7 +21,7 @@ Creature c1;
 Creature c2;
 
 public void setup() {
-	size(CANVAS_WIDTH, CANVAS_HEIGHT);
+	size(CANVAS_WIDTH, CANVAS_HEIGHT, OPENGL);
 	background(23, 68, 250);
 	frameRate(30);
 	
@@ -101,7 +101,7 @@ public void keyPressed() {
 		for (int i = 0; i < physics.forces().size(); i++) {
 			if (physics.forces().get(i) instanceof Spring) {
 			    Spring mSSpring = (Spring)physics.forces().get(i);
-			    mSSpring.restlength(10);
+			    mSSpring.restlength(3);
 			}
 		}
 	}
