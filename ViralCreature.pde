@@ -20,19 +20,19 @@ class ViralCreature extends Creature {
     println("hormones: "+hormones);
 
     color outerColor = color(232, 104, 187+(20*hormones));
-    color innerColor = color(15+(30*hormones), 232, 55);
+    color innerColor = color(15+(25*hormones), 232, 55);
     color mouthColor = color(185, 185, 185, 20);
     
     float strokeOpacity = 200;
     float fillOpacity = 30;
       
-    float h = 5+(0.8*hormones);
-    float w = 5+(0.8*hormones);
+    float h = 8+(1*hormones);
+    float w = 8+(1*hormones);
 
     int x = 5;
     int y = 5;
-    float outsideRadius = 35+(0.02*hormones);
-    float insideRadius = 15+(0.05*hormones);
+    float outsideRadius = 35+(0.2*hormones);
+    float insideRadius = 15+(0.5*hormones);
 
     int numPoints = 7;
     float angle = 0;
@@ -43,8 +43,8 @@ class ViralCreature extends Creature {
 
     beginShape(TRIANGLE_STRIP); 
       for (int i = 0; i <= numPoints; i++) {
-        float px = x + cos(radians(angle)) * outsideRadius;
-        float py = y + sin(radians(angle)) * outsideRadius;
+        float px = x + hormones + cos(radians(angle)) * outsideRadius;
+        float py = y + hormones + sin(radians(angle)) * outsideRadius;
         angle += angleStep;
         stroke(outerColor, strokeOpacity);
         fill(outerColor, fillOpacity-(5*hormones));
@@ -53,7 +53,7 @@ class ViralCreature extends Creature {
         py = y + sin(radians(angle)) * insideRadius;
         stroke(innerColor, strokeOpacity);
         fill(innerColor, fillOpacity-(5*hormones));
-        ellipse(px, py, w+(0.5*hormones), h+(0.5*hormones)); 
+        ellipse(px, py, w+(2.5*hormones), h+(2.5*hormones)); 
         angle += angleStep;
       }
       ellipseMode(CENTER);
