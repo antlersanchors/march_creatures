@@ -14,6 +14,7 @@ Physics physics;
 Spring spring;
 CollisionManager collision;
 Herd herd;
+Oscillator osc;
 
 ArrayList<Creature> creatures = new ArrayList<Creature>();
 
@@ -49,6 +50,9 @@ public void setup() {
 	
 	spring = physics.makeSpring(c1, c2);
 	spring.restlength(100);
+
+	//OSCILLATOR
+	osc = new Oscillator(-10, 5, 0.05);
 	
 }
 
