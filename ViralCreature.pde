@@ -40,7 +40,7 @@ class ViralCreature extends Creature {
   }
 
   public float mutate() {
-    
+
     float noisyOscValue;
 
     noisyOscValue = osc.update()*noise(0,0.3);
@@ -53,20 +53,23 @@ class ViralCreature extends Creature {
 
     float hormones = mutate();
 
-    color outerColor = color(232, 104, 187+(20*hormones));
-    color innerColor = color(15+(25*hormones), 232, 55);
-    color mouthColor = color(185, 185, 185, 20);
+    color creatureColor = color(232, 104, 187);
+
+    // Colours for the more colourful version
+    // color outerColor = color(232, 104, 187+(20*hormones));
+    // color innerColor = color(15+(25*hormones), 232, 55);
+    // color mouthColor = color(185, 185, 185, 20);
     
     float strokeOpacity = 200;
-    float fillOpacity = 30;
+    float fillOpacity = (30 - (5 * hormones));
       
     float h = 8+(1*hormones);
     float w = 8+(1*hormones);
 
     int x = 5;
     int y = 5;
-    float outsideRadius = 35+(0.2*hormones);
-    float insideRadius = 15+(0.5*hormones);
+    float outsideRadius = 35+(0.3*hormones);
+    float insideRadius = 15+(0.6*hormones);
 
     int numPoints = 7;
     float angle = 0;
@@ -77,23 +80,23 @@ class ViralCreature extends Creature {
 
     beginShape(TRIANGLE_STRIP); 
       for (int i = 0; i <= numPoints; i++) {
-        float px = x + hormones + cos(radians(angle)) * outsideRadius;
-        float py = y + hormones + sin(radians(angle)) * outsideRadius;
+        float px = x + cos(radians(angle)) * outsideRadius;
+        float py = y + sin(radians(angle)) * outsideRadius;
         angle += angleStep;
-        stroke(outerColor, strokeOpacity);
-        fill(outerColor, fillOpacity-(5*hormones));
+        stroke(creatureColor, strokeOpacity);
+        fill(creatureColor, fillOpacity);
         ellipse(px, py, w, h);
         px = x + cos(radians(angle)) * insideRadius;
         py = y + sin(radians(angle)) * insideRadius;
-        stroke(innerColor, strokeOpacity);
-        fill(innerColor, fillOpacity-(5*hormones));
+        stroke(creatureColor, strokeOpacity-(hormones));
+        fill(creatureColor, fillOpacity);
         ellipse(px, py, w+(2.5*hormones), h+(2.5*hormones)); 
         angle += angleStep;
       }
       ellipseMode(CENTER);
       noStroke();
-      fill(mouthColor);
-      ellipse(5, 5, 8+(0.1*hormones), 20);
+      fill(creatureColor, fillOpacity);
+      ellipse(5, 5, 3+(hormones), 3+(hormones));
       endShape();
 
     shape(v,0,0);
