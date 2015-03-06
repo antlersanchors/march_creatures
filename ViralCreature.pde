@@ -5,6 +5,19 @@ class ViralCreature extends Creature {
     ellipseMode(RADIUS);
   }
 
+  public void makeFriends() {
+
+    Creature randomBuddy;
+    int creaturesSize;
+    int randomAddress;
+    
+    //Make a friend!
+    creaturesSize = creatures.size();
+    randomAddress = int(random(1, creaturesSize));
+    randomBuddy = creatures.get(randomAddress);
+    spring = physics.makeSpring(newCreature, randomBuddy);
+  }
+
   private float mutate() {
     float noisyOscValue;
 
@@ -17,7 +30,6 @@ class ViralCreature extends Creature {
     PShape v;
 
     float hormones = mutate();
-    println("hormones: "+hormones);
 
     color outerColor = color(232, 104, 187+(20*hormones));
     color innerColor = color(15+(25*hormones), 232, 55);
@@ -63,11 +75,6 @@ class ViralCreature extends Creature {
       endShape();
 
     shape(v,0,0);
-  }
-
-  public void old_draw_shape(){
-    ellipse(0, 0, radius(), radius());  
-    line(0, 0, radius(), 0);
   }
   
   public boolean inside(int mx, int my) {    
