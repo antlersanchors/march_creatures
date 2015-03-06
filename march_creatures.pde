@@ -9,6 +9,7 @@ final int CANVAS_HEIGHT = 750;
 
 // This is the global variable for radius of creature, but I didn't implement it yet
 float r;
+boolean manualControl = false;
 
 // Max number of creatures
 int maxCreatures = 40;
@@ -92,7 +93,42 @@ public void draw() {
 	}
 	// println("creatures.size(): "+creatures.size());
 
-	
+	float randomAction = random(0,800);
+
+	if ( randomAction < 20 && manualControl == false ) {
+
+			ViralCreature newCreature;
+
+			newCreature = new ViralCreature((int)random(width), (int)random(height), 20);
+			creatures.add(newCreature);
+			herd.add(newCreature);
+			physics.add(newCreature);
+
+			newCreature.makeFriends(newCreature);
+
+			}
+
+		else if ( randomAction < 30 && manualControl == false ) {
+
+			for (int i = 0; i < physics.forces().size(); i++) {
+					if (physics.forces().get(i) instanceof Spring) {
+					    Spring mSSpring = (Spring)physics.forces().get(i);
+					    	if ( mSSpring.restlength() == 3 ){
+					    		mSSpring.restlength(175);
+					    	} else {
+					    		mSSpring.restlength(3);
+					    	}
+					} 
+			}
+		}
+		else if ( randomAction < 35 && manualControl == false ) {
+
+			for (int j = 0; j < creatures.size()-1; j++ ) {
+			creatures.remove(j);
+			
+			}
+		}
+
 
 	imageMode(CORNER);
 	image(petriDish,0,0);
@@ -134,6 +170,23 @@ public void keyPressed() {
 		for (int j = 0; j < creatures.size()-1; j++ ) {
 			creatures.remove(j);
 			
+		}
+	} 
+
+	else if ( key == 'm' || key == 'M' ) {
+		manualControl = !manualControl;
+	}
+
+	else if ( key == 's' || key == 'S' ) {
+		for (int i = 0; i < physics.forces().size(); i++) {
+				if (physics.forces().get(i) instanceof Spring) {
+				    Spring mSSpring = (Spring)physics.forces().get(i);
+				    	if ( mSSpring.restlength() == 3 ){
+				    		mSSpring.restlength(175);
+				    	} else {
+				    		mSSpring.restlength(3);
+				    	}
+				} 
 		}
 	} 
 
