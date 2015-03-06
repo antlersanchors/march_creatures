@@ -7,8 +7,11 @@ import teilchen.util.CollisionManager;
 final int CANVAS_WIDTH = 650;
 final int CANVAS_HEIGHT = 650;
 
-// This is the global variable for number of creatures?
+// This is the global variable for radius of creature, but I didn't implement it yet
 float r;
+
+// Max number of creatures
+int maxCreatures = 5;
 
 Physics physics;
 Spring spring;
@@ -74,15 +77,20 @@ public void draw() {
 	for(int i = 0; i < creatures.size(); i++) {
 	Creature c = creatures.get(i);
 	c.display();
-	c.contractions();
+	// c.contractions();
 	}
 
 	collision.removeCollisionResolver();
 
+	//Check and cull the herd if necessary
+	if ( creatures.size() > maxCreatures ) {
+		Creature oldCreature = creatures.get(0);
+		oldCreature.cull();
+	}
 }
 
 public void keyPressed() {
-	if ( key == 'f' || key == 'F' ) {
+	if ( key == 'u' || key == 'U' ) {
 		println("pressed!");
 
 		ViralCreature newCreature;

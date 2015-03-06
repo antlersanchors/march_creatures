@@ -1,4 +1,6 @@
 class ViralCreature extends Creature {
+
+  boolean alive = true;
   
   public ViralCreature(int x, int y, int r) {
     super(x, y, r);
@@ -47,11 +49,23 @@ class ViralCreature extends Creature {
 
     return noisyOscValue;
   }
+
+  public void cull() {
+
+    this.alive = false;
+
+  }
   
   public void draw_shape(){
     PShape v;
 
     float hormones = mutate();
+
+    float outsideRadius = 0;
+    float insideRadius = 0;
+    int numPoints = 0;
+    float angle = 0;
+    float angleStep = 0;
 
     color creatureColor = color(232, 104, 187);
 
@@ -68,12 +82,26 @@ class ViralCreature extends Creature {
 
     int x = 5;
     int y = 5;
-    float outsideRadius = 35+(0.3*hormones);
-    float insideRadius = 15+(0.6*hormones);
 
-    int numPoints = 7;
-    float angle = 0;
-    float angleStep = 180.0/numPoints;
+    if ( alive ) {     
+      outsideRadius = 35+(0.3*hormones);
+      insideRadius = 15+(0.6*hormones);
+      numPoints = 7;
+      angle = 0;
+      angleStep = 180.0/numPoints;
+
+    } else if ( !alive && fillOpacity > 0 ){
+      outsideRadius += 0.1;
+      insideRadius = 15+(0.6*hormones);
+      numPoints = 7;
+      angle = 0;
+      angleStep = 180.0/numPoints;
+      fillOpacity -= 0.1;
+
+    } else {
+
+      creatures.remove(0);
+    }
 
     shapeMode(CENTER);
     v = createShape(GROUP);
