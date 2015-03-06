@@ -37,10 +37,10 @@ class ViralCreature extends Creature {
           mSSpring.restlength(springLength);
       }
     }
-
   }
 
   public float mutate() {
+    
     float noisyOscValue;
 
     noisyOscValue = osc.update()*noise(0,0.3);
