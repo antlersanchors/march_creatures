@@ -11,7 +11,7 @@ final int CANVAS_HEIGHT = 650;
 float r;
 
 // Max number of creatures
-int maxCreatures = 50;
+int maxCreatures = 45;
 
 Physics physics;
 Spring spring;
@@ -92,34 +92,56 @@ public void draw() {
 
 public void keyPressed() {
 	if ( key == 'u' || key == 'U' ) {
-		
 
-		ViralCreature newCreature;
+		float randomChance = random(0,10);
 
-		newCreature = new ViralCreature((int)random(width), (int)random(height), 20);
-		creatures.add(newCreature);
-		herd.add(newCreature);
-		physics.add(newCreature);
+		if ( randomChance < 6 ) {
 
-		newCreature.makeFriends(newCreature);
-		
+			ViralCreature newCreature;
+
+			newCreature = new ViralCreature((int)random(width), (int)random(height), 20);
+			creatures.add(newCreature);
+			herd.add(newCreature);
+			physics.add(newCreature);
+
+			newCreature.makeFriends(newCreature);
+			
+			} 
+		else if ( randomChance < 8 ) {
+			for (int i = 0; i < physics.forces().size(); i++) {
+					if (physics.forces().get(i) instanceof Spring) {
+					    Spring mSSpring = (Spring)physics.forces().get(i);
+					    mSSpring.restlength(3);
+					} 
+					else {
+						for (int i = 0; i < physics.forces().size(); i++) {
+							if (physics.forces().get(i) instanceof Spring) {
+							    Spring mSSpring = (Spring)physics.forces().get(i);
+							    mSSpring.restlength(175);
+					
+							}
+						}
+
+					}
 	}
 
 	//Manual control of the spring value
-	if ( key == 's' || key == 'S') {
-		for (int i = 0; i < physics.forces().size(); i++) {
-			if (physics.forces().get(i) instanceof Spring) {
-			    Spring mSSpring = (Spring)physics.forces().get(i);
-			    mSSpring.restlength(3);
-			}
-		}
-	}
-	if ( key == 'd' || key == 'D') {
-		for (int i = 0; i < physics.forces().size(); i++) {
-			if (physics.forces().get(i) instanceof Spring) {
-			    Spring mSSpring = (Spring)physics.forces().get(i);
-			    mSSpring.restlength(175);
-			}
-		}
-	}
+	// if ( key == 's' || key == 'S') {
+	// 	for (int i = 0; i < physics.forces().size(); i++) {
+	// 		if (physics.forces().get(i) instanceof Spring) {
+	// 		    Spring mSSpring = (Spring)physics.forces().get(i);
+	// 		    mSSpring.restlength(3);
+	// 		}
+	// 	}
+	// }
+	// if ( key == 'd' || key == 'D') {
+	// 	for (int i = 0; i < physics.forces().size(); i++) {
+	// 		if (physics.forces().get(i) instanceof Spring) {
+	// 		    Spring mSSpring = (Spring)physics.forces().get(i);
+	// 		    mSSpring.restlength(175);
+	// 		}
+	// 	}
+	// }
+
 }
+
