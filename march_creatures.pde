@@ -11,7 +11,7 @@ final int CANVAS_HEIGHT = 650;
 float r;
 
 // Max number of creatures
-int maxCreatures = 5;
+int maxCreatures = 40;
 
 Physics physics;
 Spring spring;
@@ -112,7 +112,12 @@ public void keyPressed() {
 			for (int i = 0; i < physics.forces().size(); i++) {
 					if (physics.forces().get(i) instanceof Spring) {
 					    Spring mSSpring = (Spring)physics.forces().get(i);
-					    mSSpring.restlength(3);
+					    	if ( mSSpring == 3 ){
+					    		mSSpring.restlength(175);
+					    	} else {
+					    		mSSpring.restlength(3);
+					    	}
+					    
 					} 
 					else {
 						for (int j = 0; j < physics.forces().size(); j++) {
