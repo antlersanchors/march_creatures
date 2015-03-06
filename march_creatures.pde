@@ -84,21 +84,15 @@ public void keyPressed() {
 	if ( key == 'f' || key == 'F' ) {
 		println("pressed!");
 
-		Creature newCreature;
-		Creature randomBuddy;
-		int creaturesSize;
-		int randomAddress;
+		ViralCreature newCreature;
 
 		newCreature = new ViralCreature((int)random(width), (int)random(height), 20);
 		creatures.add(newCreature);
 		herd.add(newCreature);
 		physics.add(newCreature);
 
-		//Make a friend!
-		creaturesSize = creatures.size();
-		randomAddress = int(random(1, creaturesSize));
-		randomBuddy = creatures.get(randomAddress);
-		spring = physics.makeSpring(newCreature, randomBuddy);
+		newCreature.makeFriends(newCreature);
+		
 	}
 
 	if ( key == 's' || key == 'S') {

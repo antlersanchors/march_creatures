@@ -5,17 +5,20 @@ class ViralCreature extends Creature {
     ellipseMode(RADIUS);
   }
 
-  public void makeFriends() {
+  public void makeFriends(ViralCreature newC) {
 
+    Creature newCreature = newC;
     Creature randomBuddy;
     int creaturesSize;
     int randomAddress;
-    
+
     //Make a friend!
     creaturesSize = creatures.size();
     randomAddress = int(random(1, creaturesSize));
     randomBuddy = creatures.get(randomAddress);
     spring = physics.makeSpring(newCreature, randomBuddy);
+    println("newCreature: "+newCreature);
+    println("randomBuddy: "+randomBuddy);
   }
 
   private float mutate() {
