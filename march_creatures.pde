@@ -11,7 +11,7 @@ final int CANVAS_HEIGHT = 650;
 float r;
 
 // Max number of creatures
-int maxCreatures = 5;
+int maxCreatures = 50;
 
 Physics physics;
 Spring spring;
@@ -87,11 +87,12 @@ public void draw() {
 		Creature oldCreature = creatures.get(0);
 		oldCreature.cull();
 	}
+	println("creatures.size(): "+creatures.size());
 }
 
 public void keyPressed() {
 	if ( key == 'u' || key == 'U' ) {
-		println("pressed!");
+		
 
 		ViralCreature newCreature;
 

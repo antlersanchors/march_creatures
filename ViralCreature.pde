@@ -19,8 +19,7 @@ class ViralCreature extends Creature {
     randomAddress = int(random(1, creaturesSize));
     randomBuddy = creatures.get(randomAddress);
     spring = physics.makeSpring(newCreature, randomBuddy);
-    println("newCreature: "+newCreature);
-    println("randomBuddy: "+randomBuddy);
+    
   }
 
   public void contractions(){
@@ -90,13 +89,13 @@ class ViralCreature extends Creature {
       angle = 0;
       angleStep = 180.0/numPoints;
 
-    } else if ( !alive && fillOpacity > 0 ){
-      outsideRadius += 0.1;
+    } else if ( !alive && fillOpacity > 1 ){
+      outsideRadius += 30;
       insideRadius = 15+(0.6*hormones);
       numPoints = 7;
       angle = 0;
       angleStep = 180.0/numPoints;
-      fillOpacity -= 0.1;
+      fillOpacity -= 1;
 
     } else {
 
