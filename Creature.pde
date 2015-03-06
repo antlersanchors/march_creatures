@@ -32,6 +32,8 @@ class Creature extends BehaviorParticle {
   public void draw_shape() {}
 
   public void makeFriends() {}
+
+  public void contractions() {}
   
   public boolean inside(int mx, int my){return false;}
   

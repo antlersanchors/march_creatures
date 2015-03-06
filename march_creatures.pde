@@ -74,6 +74,7 @@ public void draw() {
 	for(int i = 0; i < creatures.size(); i++) {
 	Creature c = creatures.get(i);
 	c.display();
+	c.contractions();
 	}
 
 	collision.removeCollisionResolver();
@@ -95,6 +96,7 @@ public void keyPressed() {
 		
 	}
 
+	//Manual control of the spring value
 	if ( key == 's' || key == 'S') {
 		for (int i = 0; i < physics.forces().size(); i++) {
 			if (physics.forces().get(i) instanceof Spring) {

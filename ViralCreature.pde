@@ -21,7 +21,26 @@ class ViralCreature extends Creature {
     println("randomBuddy: "+randomBuddy);
   }
 
-  private float mutate() {
+  public void contractions(){
+
+    int springLength;
+
+    if ( creatures.size() % 7 == 0) {
+      springLength = 3;
+    } else { 
+      springLength = 175;
+      }
+
+    for (int i = 0; i < physics.forces().size(); i++) {
+      if (physics.forces().get(i) instanceof Spring) {
+          Spring mSSpring = (Spring)physics.forces().get(i);
+          mSSpring.restlength(springLength);
+      }
+    }
+
+  }
+
+  public float mutate() {
     float noisyOscValue;
 
     noisyOscValue = osc.update()*noise(0,0.3);
