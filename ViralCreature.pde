@@ -51,7 +51,7 @@ class ViralCreature extends Creature {
 
   public void cull() {
 
-    this.alive = false;
+    alive = false;
 
   }
   

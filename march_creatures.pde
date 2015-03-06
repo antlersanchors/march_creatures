@@ -4,8 +4,8 @@ import teilchen.force.ViscousDrag;
 import teilchen.force.Attractor;
 import teilchen.util.CollisionManager;
 
-final int CANVAS_WIDTH = 650;
-final int CANVAS_HEIGHT = 650;
+final int CANVAS_WIDTH = 750;
+final int CANVAS_HEIGHT = 750;
 
 // This is the global variable for radius of creature, but I didn't implement it yet
 float r;
@@ -24,10 +24,12 @@ ArrayList<Creature> creatures = new ArrayList<Creature>();
 Creature c1;
 Creature c2;
 
+PImage petriDish;
+
 public void setup() {
 	size(CANVAS_WIDTH, CANVAS_HEIGHT, OPENGL);
-	background(23, 68, 250);
 	frameRate(30);
+	petriDish = loadImage("petriDish.png");
 	
 	physics = new Physics();
 	
@@ -56,10 +58,11 @@ public void setup() {
 
 	//OSCILLATOR
 	osc = new Oscillator(-5, 5, 0.03);
-	
+
 }
 
 public void draw() {
+
 	background(23, 68, 250);
 
 	//HERD
@@ -87,7 +90,12 @@ public void draw() {
 		Creature oldCreature = creatures.get(0);
 		oldCreature.cull();
 	}
-	println("creatures.size(): "+creatures.size());
+	// println("creatures.size(): "+creatures.size());
+
+	
+
+	imageMode(CORNER);
+	image(petriDish,0,0);
 }
 
 public void keyPressed() {
@@ -105,33 +113,31 @@ public void keyPressed() {
 			physics.add(newCreature);
 
 			newCreature.makeFriends(newCreature);
-			
+
 			}
 
 		else if ( randomChance < 7 ) {
 			for (int i = 0; i < physics.forces().size(); i++) {
 					if (physics.forces().get(i) instanceof Spring) {
 					    Spring mSSpring = (Spring)physics.forces().get(i);
-					    	if ( mSSpring == 3 ){
+					    	if ( mSSpring.restlength() == 3 ){
 					    		mSSpring.restlength(175);
 					    	} else {
 					    		mSSpring.restlength(3);
 					    	}
-					    
 					} 
-					else {
-						for (int j = 0; j < physics.forces().size(); j++) {
-							if (physics.forces().get(j) instanceof Spring) {
-							    Spring mSSpring = (Spring)physics.forces().get(j);
-							    mSSpring.restlength(175);
-					
-							}
-						}
-
-					}
 			}
-
 		}
 	}
+
+	else if ( key == 'c' || key == 'C' ) {
+		for (int j = 0; j < creatures.size()-1; j++ ) {
+			creatures.remove(j);
+			
+		}
+	} 
+
 }
+
+
 
